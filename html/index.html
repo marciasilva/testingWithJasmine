@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>First angular test with Jasmine</title>
+
+  <link rel="shortcut icon" type="image/png" href="..\tests\lib\jasmine-2.3.4jasmine-2.3.4jasmine_favicon.png">
+  <link rel="stylesheet" href="../tests/lib/jasmine-2.3.4/jasmine.css">
+
+  <script src="../tests/lib/jasmine-2.3.4/jasmine.js"></script>
+  <script src="../tests/lib/jasmine-2.3.4/jasmine-html.js"></script>
+  <script src="../tests/lib/jasmine-2.3.4/boot.js"></script>
+
+    <!-- include Angular-->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+  <script src="https://code.angularjs.org/1.3.15/angular-mocks.js"></script>
+
+
+  <!-- include source files here... -->
+  <script src="../scripts/controllers.js"></script>
+
+  <!-- include spec files here...  -->
+  <script src="../tests/angularTest.js"></script>
+
+  <!-- incluse service files-->
+  <script type="text/javascript" src = "../scripts/services.js"></script>>
+
+</head>
+
+<body>
+
+  <div ng-app="firstApp">
+    <div ng-controller = "PhoneListCtrl">
+    
+      <ul>
+        <li ng-repeat="phone in phones">
+          <span>{{phone.name}}</span>
+          <p>{{phone.snippet}}</p>
+        </li>
+      </ul>
+
+
+      <table>
+    <thead>
+      <tr><th colspan="4">Drivers Championship Standings</th></tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="driver in driversList">
+        <td>{{$index + 1}}</td>
+        <td>
+          {{driver.Driver.givenName}}&nbsp;{{driver.Driver.familyName}}
+        </td>
+        <td>{{driver.Constructors[0].name}}</td>
+        <td>{{driver.points}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+    </div><!-- final scope PhoneListController -->
+
+  </div><!-- final scope firstApp -->
+</body>
+</html>
