@@ -5,7 +5,6 @@
   <meta charset="utf-8">
   <title>First angular test with Jasmine</title>
 
-  <link rel="shortcut icon" type="image/png" href="..\tests\lib\jasmine-2.3.4jasmine-2.3.4jasmine_favicon.png">
   <link rel="stylesheet" href="../tests/lib/jasmine-2.3.4/jasmine.css">
 
   <script src="../tests/lib/jasmine-2.3.4/jasmine.js"></script>
@@ -28,37 +27,31 @@
 
 </head>
 
-<body>
+<body ng-app = "root">
 
-  <div ng-app="firstApp">
-    <div ng-controller = "PhoneListCtrl">
-    
-      <ul>
-        <li ng-repeat="phone in phones">
-          <span>{{phone.name}}</span>
-          <p>{{phone.snippet}}</p>
-        </li>
-      </ul>
+	<div ng-controller="indexCtrl">
+	<div>
+		Favorite word: <input type="text" ng-model = "favoriteWord"/>
+		{{favoriteWord}}
+	</div>
+	<div>
+		Favorite color:
+		<input type="radio" name="fc" value="Red" ng-model = "favoriteColor">Red</input>
+		<input type="radio" name="fc" value="Green" ng-model = "favoriteColor">Green</input>
+		<input type="radio" name="fc" value="Yellow" ng-model = "favoriteColor">Yellow</input>
+		<input type="radio" name="fc" value="Blue" ng-model = "favoriteColor">Blue</input>
+		-{{favoriteColor}}
+	</div>
+	<div>
+		Favorite shape:
+		<select ng-model = "favoriteShape">
+			<option value="Circle">Circle</option>
+			<option value="Triangle">Triangle</option>
+			<option value="Square">Square</option>
+		</select>
+		{{favoriteShape}}
+	</div>
+	</div>
 
-
-      <table>
-    <thead>
-      <tr><th colspan="4">Drivers Championship Standings</th></tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="driver in driversList">
-        <td>{{$index + 1}}</td>
-        <td>
-          {{driver.Driver.givenName}}&nbsp;{{driver.Driver.familyName}}
-        </td>
-        <td>{{driver.Constructors[0].name}}</td>
-        <td>{{driver.points}}</td>
-      </tr>
-    </tbody>
-  </table>
-
-    </div><!-- final scope PhoneListController -->
-
-  </div><!-- final scope firstApp -->
 </body>
 </html>
