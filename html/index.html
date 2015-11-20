@@ -6,14 +6,15 @@
   <title>First angular test with Jasmine</title>
 
   <link rel="stylesheet" href="../tests/lib/jasmine-2.3.4/jasmine.css">
+  <link rel = "stylesheet" href = "style.css">
 
   <script src="../tests/lib/jasmine-2.3.4/jasmine.js"></script>
   <script src="../tests/lib/jasmine-2.3.4/jasmine-html.js"></script>
   <script src="../tests/lib/jasmine-2.3.4/boot.js"></script>
 
     <!-- include Angular-->
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
-  <script src="https://code.angularjs.org/1.3.15/angular-mocks.js"></script>
+  <script src="https://code.angularjs.org/1.4.8/angular.min.js"></script>
+  <script src="https://code.angularjs.org/1.4.8/angular-mocks.js"></script>
 
 
   <!-- include source files here... -->
@@ -23,7 +24,7 @@
   <script src="../tests/angularTest.js"></script>
 
   <!-- incluse service files-->
-  <script type="text/javascript" src = "../scripts/services.js"></script>>
+  <script type="text/javascript" src = "../scripts/services.js"></script>
 
 </head>
 
@@ -53,5 +54,22 @@
 	</div>
 	</div>
 
+	<div ng-controller="bold">
+  		<input id="txtApplyStyle" type="text" placeholder="Enter a number" ng-model="val" />
+  		<span ng-class = "{bold: isBold(), strike: isStrike(), red: isRed()};">Example Text</span>
+
+  		<table>
+	  	<thead>
+		 	<tr ng-repeat = "product in products">
+			 	<td>{{product.id}}</td>
+			  	<td>{{product.name}}</td>
+		  	</tr>
+	  	</thead>
+  		</table>
+  		<p>Here is a value inside bold escope declared as a service: </p>
+  		<p>{{msgService}}</p>
+  		<p>Here the result from factory multiply services: {{resultMultFunc}}</p> 
+  		<p>Here the result from service multiply services: {{resultMultServ}}</p>
+	</div>
 </body>
 </html>
