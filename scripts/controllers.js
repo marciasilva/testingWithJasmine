@@ -42,4 +42,39 @@ rootModule.controller('names', function($scope){
     $scope.changeToGeorge = function() {
         $scope.name="George";
     };
-})
+});
+
+rootModule.controller('feed', ['$scope', '$filter', function($scope, $filter){
+    var _subject = "Brazil";
+    $scope.option = {
+        subject : function(newSub){
+            return arguments.length ? (_subject = newSub) : _subject;
+        },
+    }
+
+    $scope.sendMeUpdateSub = function(newSub, oldSub){
+		console.log('updated');
+    };
+}]);
+
+
+rootModule.directive("notifyMe", function(){
+    return {
+        scope : {
+            notifyMe : "&"
+        },
+        require : "ngModel",
+        link : function(scope, element, attrs, ctrl){
+            var oldValue;
+            ctrl.$formatters.push(function(value){
+                oldValue = value;
+                return value;
+            });
+            ctrl.$parsers.push(function(value){
+                scope.notifyMe()(value,oldValue);
+                olValue = value;
+                return value;
+            });
+        }
+    };
+});
