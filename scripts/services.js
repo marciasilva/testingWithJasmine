@@ -13,8 +13,3 @@ services.service("multServ", function(multFactor){
 	}
 });
 
-services.service("feedServices", function(){
-	this.load = function(){
-		
-	}
-});

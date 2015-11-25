@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+  <title>feed service</title>
+
+  <link rel="stylesheet" href="../tests/lib/jasmine-2.3.4/jasmine.css">
+  <link rel = "stylesheet" href = "../styles/style.css">
+
+  <script src="../tests/lib/jasmine-2.3.4/jasmine.js"></script>
+  <script src="../tests/lib/jasmine-2.3.4/jasmine-html.js"></script>
+  <script src="../tests/lib/jasmine-2.3.4/boot.js"></script>
+
+    <!-- include Angular-->
+  <script src="https://code.angularjs.org/1.4.8/angular.min.js"></script>
+  <script src="https://code.angularjs.org/1.4.8/angular-mocks.js"></script>
+
+  <!-- include source files here... -->
+  <script src="../scripts/feedcontrollers.js"></script>
+
+  <!-- include spec files here...  -->
+  <script src="../tests/feedTest.js"></script>
+
+  <!-- incluse service files-->
+  <script type="text/javascript" src = "../scripts/feedservices.js"></script>
+
+</head>
+<body ng-app = "feed">
+<div ng-controller = "basicCrtl">
+{{iniMsg}}
+<button ng-click="callLoadFeedServ" >
+  Load
+</button>
+<div ng-repeat="feed in feeds">
+  {{feed}}
+</div>
+
+</div>
+
+</body>
+</html>
