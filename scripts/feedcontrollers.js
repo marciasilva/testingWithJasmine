@@ -1,21 +1,10 @@
 var feedApp = angular.module('feed',['fServices']);
 
-feedApp.controller('basicCrtl',['loadFeed', '$scope', function( loadFeed, $scope){
-	console.log($scope.feeds);
-
-
-	var promise = loadFeed.loadFeeds();
-	promise.then(
-		function(payload){
-			$scope.feeds = payload.data.posts;
-			for(propertyName in $scope.feeds){
-				console.log('p ' + propertyName);
-				console.log('v ' + $scope.feeds[propertyName]);
-			}
-		},
-		function(errorPayload){
-			console.log('error');
+feedApp.controller('basicCrtl',['FeedList', '$scope', function( FeedList, $scope){
+	$scope.feeds = FeedList.get();
+		console.log('before on ' + $scope.feeds);
+		$scope.$on('FeedList', function (event, data) {
+			$scope.feeds = data;
+			console.log('after ' + $scope.feeds);
 		});
-	
-	//console.log($scope.feeds);
 }]);

@@ -1,15 +1,25 @@
-var feedServices = angular.module('fServices',[]);
-feedServices.factory('loadFeed',['$http', function ($http) {
-	return{
-		loadFeeds : function(){
-			return $http.jsonp('https://public-api.wordpress.com/rest/v1/sites/wtmpeachtest.wordpress.com/posts?callback=JSON_CALLBACK')
-			.success(function (data, status, headers, config){
-				return data;
-			}).
-			error(function (data, status, headers, config){
-				console.log('data error ' + data);
-				console.log('status error' + status);
-			}); 
-		}
-	}
-}]);
+var feedServices = angular.module('fServices',['ngResource']);
+	var feeds = []
+	feedServices.factory('FeedLoader',['$resource', function ($resource) {
+		return $resource('http://ajax.googleapis.com/ajax/services/feed/load', {}, {
+			fetch: { method: 'JSONP', params: {v: '1.0', callback: 'JSON_CALLBACK'} }
+		});
+	}]);
+
+	feedServices.service('FeedList',['$rootScope', 'FeedLoader', function ($rootScope, FeedLoader) {
+		this.get = function() {
+			var feedSources = [
+			{title: 'Slashdot', url: 'http://rss.slashdot.org/Slashdot/slashdot'},
+			{title: 'Tweakers', url: 'http://feeds.feedburner.com/tweakers/mixed'},
+			{title: 'Wired', url: 'http://feeds.wired.com/wired/index'},
+			];
+			for (var i=0; i<feedSources.length; i++) {
+				FeedLoader.fetch({q: feedSources[i].url, num: 10}, {}, function (data) {
+
+					var feed = data.responseData.feed;
+					feeds.push(feed);
+				});
+			}
+			return feeds;
+		};
+	}]);

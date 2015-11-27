@@ -2,42 +2,40 @@
 <html>
 <head>
 	<meta charset="utf-8">
-  <title>feed service</title>
+	<title>feed service</title>
 
-  <link rel="stylesheet" href="../tests/lib/jasmine-2.3.4/jasmine.css">
-  <link rel = "stylesheet" href = "../styles/style.css">
+	<link rel="stylesheet" href="../tests/lib/jasmine-2.3.4/jasmine.css">
+	<link rel = "stylesheet" href = "../styles/style.css">
 
-  <script src="../tests/lib/jasmine-2.3.4/jasmine.js"></script>
-  <script src="../tests/lib/jasmine-2.3.4/jasmine-html.js"></script>
-  <script src="../tests/lib/jasmine-2.3.4/boot.js"></script>
+	<script src="../tests/lib/jasmine-2.3.4/jasmine.js"></script>
+	<script src="../tests/lib/jasmine-2.3.4/jasmine-html.js"></script>
+	<script src="../tests/lib/jasmine-2.3.4/boot.js"></script>
 
-    <!-- include Angular-->
-  <script src="https://code.angularjs.org/1.4.8/angular.min.js"></script>
-  <script src="https://code.angularjs.org/1.4.8/angular-mocks.js"></script>
+	<!-- include Angular-->
+	<script src="https://code.angularjs.org/1.4.8/angular.min.js"></script>
+	<script src="https://code.angularjs.org/1.4.8/angular-mocks.js"></script>
+	<script src="https://code.angularjs.org/1.2.16/angular-resource.js"></script>
 
-  <!-- include source files here... -->
-  <script src="../scripts/feedcontrollers.js"></script>
+	<!-- include source files here... -->
+	<script src="../scripts/feedcontrollers.js"></script>
 
-  <!-- include spec files here...  -->
-  <script src="../tests/feedTest.js"></script>
+	<!-- include spec files here...  -->
+	<script src="../tests/feedTest.js"></script>
 
-  <!-- incluse service files-->
-  <script type="text/javascript" src = "../scripts/feedservices.js"></script>
-
-  <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" 
+	<!-- incluse service files-->
+	<script type="text/javascript" src = "../scripts/feedservices.js"></script>
 
 </head>
 <body ng-app = "feed">
-<div ng-controller = "basicCrtl">
+	<div ng-controller = "basicCrtl">
 
-<div ng-repeat = "feed in feeds track by $index">
-{{feed.content}}
-
+		<div ng-repeat="feed in feeds | orderBy:'title'">
+	<h2><a href="{{feed.link}}" target="_blank">{{feed.title}}</a></h2>
+	<p><span ng-repeat="item in feed.entries">
+		<a href="{{item.link}}" target="_blank">{{item.title}}</a> (<span>{{item.publishedDate | date:'d-MM-yyyy HH:mm'}}</span>)<br />
+	</span></p>
 </div>
-
-
-</div>
+	</div>
 
 </body>
 </html>
