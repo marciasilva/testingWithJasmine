@@ -1,4 +1,4 @@
-var rootModule = angular.module("root", ["services"]);
+var rootModule = angular.module("root", ["ui.bootstrap", "services"]);
 
 rootModule.controller("indexCtrl", ["$scope", function($scope) {
     $scope.favoriteWord;
@@ -78,3 +78,58 @@ rootModule.directive("notifyMe", function(){
         }
     };
 });
+
+//Este controller funciona como uma classe
+rootModule.controller('InvoiceController', ['currencyConverter', function(currencyConverter) {
+  this.qty = 1;
+  this.cost = 2;
+  this.inCurr = 'EUR';
+  this.currencies = currencyConverter.currencies;
+
+  this.total = function total(outCurr) {
+    return currencyConverter.convert(this.qty * this.cost, this.inCurr, outCurr);
+  };
+  this.pay = function pay() {
+    window.alert("Thanks!");
+  };
+}]);
+
+rootModule.controller('MyController', ['$scope', function($scope) {
+  $scope.username = 'World';
+
+  $scope.sayHello = function() {
+    $scope.greeting = 'Hello ' + $scope.username + '!';
+  };
+}]);
+
+rootModule.controller('GreetController', ['$scope', '$rootScope', function($scope, $rootScope) {
+  $scope.name = 'World';
+  $scope.department = "dep greeting";
+  $rootScope.department = 'Angular';
+
+  $scope.message = 'hello';
+
+  $scope.updateMessage = function(message){
+    $scope.message = message;
+  };
+  
+}]);
+
+rootModule.controller('ListController', ['$scope', function($scope) {
+   // $scope.department = 'ListController scope';
+  $scope.names = ['Igor', 'Misko', 'Vojta'];
+}]);
+
+rootModule.controller('MainController', ['$scope', function($scope) {
+  $scope.timeOfDay = 'morning';
+  $scope.name = 'Nikki';
+}]);
+
+rootModule.controller('ChildController', ['$scope', function($scope) {
+  $scope.name = 'Mattie';
+}]);
+
+rootModule.controller('GrandChildController', ['$scope', function($scope) {
+  $scope.timeOfDay = 'evening';
+  $scope.name = 'Gingerbread Baby';
+}]);
