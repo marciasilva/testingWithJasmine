@@ -2,67 +2,67 @@
 
 describe('Test bold controller', function(){
 
-  var $scope;
+  var namesCtrl;
 
-  beforeEach(module('root'));
+  beforeEach(function(){
 
-  beforeEach(inject(function($rootScope, $controller){
-    $scope = $rootScope.$new();
-    $controller("names",{$scope: $scope});
-  }));
+    module('root');
+
+    inject(function($controller){
+      namesCtrl = $controller('names');
+    });
+  });
 
   it('Should change name when funtion is called', function() {
-        $scope.changeToJackie();
-        expect($scope.name).toEqual("Ana");
-        $scope.changeToGeorge();
- 		    expect($scope.name).toEqual("George");
+        namesCtrl.changeToJackie();
+        expect(namesCtrl.name).toEqual("Ana");
+        namesCtrl.changeToGeorge();
+ 		    expect(namesCtrl.name).toEqual("George");
   });
 });
 
 
 describe('Test functions without services request', function(){
-  var $scope;
+  var myCtrl;
 
-  beforeEach(module('root'));
+  beforeEach(function(){
+    module('root');
 
-  beforeEach(inject(function($rootScope, $controller){
-    $scope = $rootScope.$new();
-    $controller("MyController", {$scope: $scope});
-  }));
+    inject(function($controller){
+      myCtrl = $controller('helloCtrl');
+    });
+  });
 
   it('Should change name on hello method', function() {
 
     // Assert that username is pre-filled
-    expect($scope.username).toEqual('World');
+    expect(myCtrl.username).toEqual('World');
 
     // Assert that we read new username and greet
-    $scope.username = 'angular';
-    $scope.sayHello();
-    expect($scope.greeting).toEqual('Hello angular!');
+    myCtrl.username = 'angular';
+    myCtrl.sayHello();
+    expect(myCtrl.greeting).toEqual('Hello angular!');
   });
 });
 
-/*TESTING NESTED CONTROLLER*/
 describe('Nexted test ', function(){
-  var mainScope, childScope, grandChildScope;
+  var mainCtrl, childCtrl, grandChildCtrl;
 
-  beforeEach(module('root'));
+  beforeEach(function(){
+    module('root');
 
-  beforeEach(inject(function($rootScope, $controller){
-    mainScope = $rootScope.$new();
-    $controller('MainController', {$scope: mainScope});
-
-    childScope = mainScope.$new();
-    $controller('ChildController', {$scope: childScope});
-
-    grandChildScope = childScope.$new();
-    $controller('GrandChildController', {$scope: grandChildScope});
-  }));
+    inject(function($controller){
+      mainCtrl = $controller('MainController');
+      childCtrl = $controller('ChildController');
+      grandChildCtrl = $controller('GrandChildController');
+    });
+  });
 
   it('Should get the correct scope', function(){
-    expect(mainScope.timeOfDay).toBe('morning');
-    expect(childScope.timeOfDay).toBe('morning');
-    expect(grandChildScope.timeOfDay).toBe('evening');
+    expect(mainCtrl.timeOfDay).toBe('morning');
+    expect(childCtrl.timeOfDay).toBe(undefined);
+    expect(grandChildCtrl.timeOfDay).toBe('evening');
   });
 });
+
 //Directive tem um jeito diferente de serem testadas

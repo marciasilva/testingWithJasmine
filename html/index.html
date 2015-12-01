@@ -28,54 +28,66 @@
 
   <!-- Latest compiled and minified CSS  necessário para usar o uibootstrap, uma vez que o bootstrapjs tem conflitos com o angular-->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-  <script type="text/javascript" src="../scripts/ui-bootstrap-tpls-0.14.3.js"></script>>
+  <script type="text/javascript" src="../scripts/ui-bootstrap-tpls-0.14.3.js"></script>
 
 </head>
 
 <body ng-app = "root">
 
-	<div ng-controller="indexCtrl">
+	Inicio favorite controller 
+
+	<div ng-controller="favoriteCtrl as favCtrl ">
 	<div>
-		Favorite word: <input type="text" ng-model = "favoriteWord"/>
-		{{favoriteWord}}
+		Favorite word: <input type="text" ng-model = "favCtrl.favoriteWord"/>
+		{{favCtrl.favoriteWord}}
 	</div>
 	<div>
 		Favorite color:
-		<input type="radio" name="fc" value="Red" ng-model = "favoriteColor">Red</input>
-		<input type="radio" name="fc" value="Green" ng-model = "favoriteColor">Green</input>
-		<input type="radio" name="fc" value="Yellow" ng-model = "favoriteColor">Yellow</input>
-		<input type="radio" name="fc" value="Blue" ng-model = "favoriteColor">Blue</input>
-		-{{favoriteColor}}
+		<input type="radio" name="fc" value="Red" ng-model = "favCtrl.favoriteColor">Red</input>
+		<input type="radio" name="fc" value="Green" ng-model = "favCtrl.favoriteColor">Green</input>
+		<input type="radio" name="fc" value="Yellow" ng-model = "favCtrl.favoriteColor">Yellow</input>
+		<input type="radio" name="fc" value="Blue" ng-model = "favCtrl.favoriteColor">Blue</input>
+		-{{favCtrl.favoriteColor}}
 	</div>
 	<div>
 		Favorite shape:
-		<select ng-model = "favoriteShape">
+		<select ng-model = "favCtrl.favoriteShape">
 			<option value="Circle">Circle</option>
 			<option value="Triangle">Triangle</option>
 			<option value="Square">Square</option>
 		</select>
-		{{favoriteShape}}
+		{{favCtrl.favoriteShape}}
 	</div>
 	</div>
 
-	<div ng-controller="bold">
-  		<input id="txtApplyStyle" type="text" placeholder="Enter a number" ng-model="val" />
-  		<span ng-class = "{bold: isBold(), strike: isStrike(), red: isRed()};">Example Text</span>
+	<br> 
+	Final Favorite Controller
+	<br>
+
+	Inicio Bold Controller
+
+	<div ng-controller="bold as boldCtrl">
+  		<input id="txtApplyStyle" type="text" placeholder="Enter a number" ng-model="boldCtrl.val" />
+  		<span ng-class = "{bold: boldCtrl.isBold(), strike: boldCtrl.isStrike(), red: boldCtrl.isRed()};">Example Text</span>
 
   		<table>
 	  	<thead>
-		 	<tr ng-repeat = "product in products">
+		 	<tr ng-repeat = "product in boldCtrl.products">
 			 	<td>{{product.id}}</td>
 			  	<td>{{product.name}}</td>
 		  	</tr>
 	  	</thead>
   		</table>
   		<p>Here is a value inside bold escope declared as a service: </p>
-  		<p>{{msgService}}</p>
-  		<p>Here the result from factory multiply services: {{resultMultFunc}}</p> 
-  		<p>Here the result from service multiply services: {{resultMultServ}}</p>
+  		<p>{{boldCtrl.msgService}}</p>
+  		<p>Here the result from factory multiply services: {{boldCtrl.resultMultFunc}}</p> 
+  		<p>Here the result from service multiply services: {{boldCtrl.resultMultServ}}</p>
 	</div>
 
+	<br>
+	Final Bold Controller
+	<br>
+	Inicio Invoice Controller
 
 	<div ng-controller="InvoiceController as invoice">
 		<b>Invoice:</b>
@@ -97,14 +109,6 @@
 		</div>
 	</div>
 
-	<div ng-controller="MyController">
-		Your name:
-		<input type="text" ng-model="username">
-		<button ng-click='sayHello()'>greet</button>
-		<hr>
-		{{greeting}}
-	</div>
-
 	<div class="show-scope-demo">
 		<div ng-controller="GreetController">
 			Hello {{name}}!
@@ -115,16 +119,19 @@
 			</ol>
 		</div>
 
-		<div ng-controller="MainController">
-			<p>Good {{timeOfDay}}, {{name}}!</p>
+		<div ng-controller="MainController as mainCtrl">
+			<p>Good {{mainCtrl.timeOfDay}}, {{mainCtrl.name}}!</p>
 
-			<div ng-controller="ChildController">
-				<p>Good {{timeOfDay}}, {{name}}!</p>
+			<div ng-controller="ChildController as childCtrl">
+				<p>Good {{mainCtrl.timeOfDay}}, {{childCtrl.name}}!</p>
 
-				<div ng-controller="GrandChildController">
-					<p>Good {{timeOfDay}}, {{name}}!</p>
+				<div ng-controller="GrandChildController as grandChildCtrl">
+					<p>Good {{grandChildCtrl.timeOfDay}}, {{grandChildCtrl.name}}!</p>
+
 				</div><!--termina escop grandchildcontroller -->
+
 			</div><!--termina escop childcontroller -->
+
 		</div> <!-- termina escopo maincontroller -->
 	</div>
 
